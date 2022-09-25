@@ -16,22 +16,20 @@ struct TaskListView: View {
                 .frame(height: 150)
             List {
                 ForEach(taskManager.tasks, id: \.id) { task in
-                    
-                    TaskRow(task: task.title, completed: task.completed)
-                        .onTapGesture {
-                            taskManager.updateTask(id: task.id, completed: !task.completed)
-                        }
-                        .swipeActions(edge: .trailing) {
-                            Button(role: .destructive) {
-                                taskManager.deleteTask(id: task.id)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
+                    if !task.isInvalidated {
+                        TaskRow(task: task.title, completed: task.completed)
+                            .onTapGesture {
+                                taskManager.updateTask(id: task.id, completed: !task.completed)
                             }
-                        }
-                    
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    taskManager.deleteTask(id: task.id)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
+                    }
                 }
-                
-                
             }
             
             Spacer()

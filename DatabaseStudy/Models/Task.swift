@@ -6,15 +6,11 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Task: Identifiable {
-    var id: String
-    var title: String
-    var completed: Bool
+class Task: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true) var id = UUID().uuidString
+    @Persisted var title: String = ""
+    @Persisted var completed: Bool = false
     
-    init(_ title: String) {
-        self.id = UUID().uuidString
-        self.title = title
-        self.completed = false
-    }
 }
