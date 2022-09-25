@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Task: Identifiable {
+struct Task: Identifiable, Codable {
     var id: String
     var title: String
     var completed: Bool
